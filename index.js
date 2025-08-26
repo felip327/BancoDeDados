@@ -66,7 +66,7 @@ app.get('/usuarios', (req,res) =>{
 
 app.get('/usuarios/:id', (req, res) =>{
     const {id} = req.params;
-    const sql = 'SELECT * usuarios WHERE id = ?'
+    const sql = 'SELECT * FROM usuarios WHERE id = ?'
     db.get(sql, [id], (err, row)=>{
         if(err)
         {
@@ -103,6 +103,8 @@ app.put('/usuarios/:id', (req, res)=>{
         }
 
         if(this.changes > 0){
+            res.json({message: 'Usuário atualizado com sucesso'})
+        }else{
             res.status(404).json({error: 'Usuarios não encontrado'});
         }
     })
